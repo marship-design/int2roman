@@ -11,57 +11,52 @@ char* integer_to_roman(int number){
 	int thou = number / 1000;
 	if(thou > 3) return NULL;
 
-	int hundr = number % 1000;
-	int tens = number % 100;
+	int hundr = (number % 1000) / 100;
+	int tens = (number % 100) / 10;
 	int ones = number % 10;
 
 	for(int i = 0; i < thou; i++){
 		res[idx++] = 'M';	
 	}
 	
-	int h = hundr / 100;
-	printf("h=%d\n", h);
-	if(h == 5){
+	if(hundr == 5){
 		res[idx++] = 'D';
-	}else if(h == 9){
+	}else if(hundr == 9){
 		res[idx++] = 'C';
 		res[idx++] = 'M';
-	}else if(h == 4){
+	}else if(hundr == 4){
 		res[idx++] = 'C';
 		res[idx++] = 'D';
-	}else if(h > 0 && h < 4){
-		for(int i = 0; i < h; i++){
+	}else if(hundr > 0 && hundr < 4){
+		for(int i = 0; i < hundr; i++){
 			res[idx++] = 'C';
 		}
-	}else if(h > 5 && h < 9){
+	}else if(hundr > 5 && hundr < 9){
 		res[idx++] = 'D';
-		for(int i = 0; i < h-5; i++){
+		for(int i = 0; i < hundr-5; i++){
 			res[idx++] = 'C';
 		}
 	}
 
-	int t = tens / 10;
-	printf("t=%d\n", t);
-	if(t == 5){
+	if(tens == 5){
 		res[idx++] = 'L';
-	}else if(t == 9){
+	}else if(tens == 9){
 		res[idx++] = 'X';
 		res[idx++] = 'C';
-	}else if(t == 4){
+	}else if(tens == 4){
 		res[idx++] = 'X';
 		res[idx++] = 'L';
-	}else if(t > 0 && t < 4){
-		for(int i = 0; i < t; i++){
+	}else if(tens > 0 && tens < 4){
+		for(int i = 0; i < tens; i++){
 			res[idx++] = 'X';
 		}
-	}else if(t > 5 && t < 9){
+	}else if(tens > 5 && tens < 9){
 		res[idx++] = 'L';
-		for(int i = 0; i < t - 5; i++){
+		for(int i = 0; i < tens - 5; i++){
 			res[idx++] = 'X';
 		}
 	}
 
-	printf("ones=%d\n", ones);
 	if(ones == 5){
 		res[idx++] = 'V';
 	}else if(ones == 9){
@@ -81,7 +76,6 @@ char* integer_to_roman(int number){
 		}
 	}
 
-
 	res[idx] = '\0';
 	return res;
 }
@@ -89,19 +83,13 @@ char* integer_to_roman(int number){
 
 int main(){
 
-	int num = 2814;
+	int num = 2001;
 	char* txt = integer_to_roman(num);
 
 	if(txt){
 		printf("Liczba %d w rzymskim zapisie to %s\n", num, txt);
 	}
 	
-	int thou = num % 10000;
-	int hundr = num % 1000;
-	int tens = num % 100;
-	int ones = num % 10;
-
-	printf("thou %d, hundr %d, tens %d, ones %d\n", thou, hundr, tens, ones);
 
 	return 0;
 }
