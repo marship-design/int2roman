@@ -81,15 +81,19 @@ char* integer_to_roman(int number){
 }
 
 
-int main(){
+int main(int argc, char* argv[]){
 
-	int num = 2001;
-	char* txt = integer_to_roman(num);
-
-	if(txt){
-		printf("Liczba %d w rzymskim zapisie to %s\n", num, txt);
+	if(argc == 2){
+		int num = atoi(argv[1]); 
+		if(num > 3999 || num < 0){
+			printf("Nubmers above 3999 are not supported\n");
+		}else{
+			char* txt = integer_to_roman(num);
+			printf("Number %d in roman is %s\n", num, txt);
+		}
+	}else{
+		printf("Try to write program_name 555\n");
 	}
-	
 
 	return 0;
 }
